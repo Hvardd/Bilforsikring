@@ -1,0 +1,19 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+.gradle/
+.kotlin/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Editors and operating system
+.idea/
+.vscode/
+*.iml
+.DS_Store
+*.log

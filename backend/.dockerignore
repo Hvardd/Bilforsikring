@@ -1,0 +1,15 @@
+# Only build inputs enter the Docker context.
+**
+!Dockerfile
+!gradlew
+!settings.gradle.kts
+!build.gradle.kts
+!gradle/
+!gradle/**
+!src/
+!src/**
+# Exclude accidental local configuration even inside included directories.
+**/.env
+**/.env.*
+**/*.local
+**/.DS_Store

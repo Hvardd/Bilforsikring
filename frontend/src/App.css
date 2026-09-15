@@ -1,0 +1,32 @@
+.purchase-page {
+  width: 100%;
+  max-width: 43rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+  padding-top: calc(3rem + env(safe-area-inset-top, 0px));
+  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+}
+
+.purchase-page__header {
+  margin-bottom: 2.5rem;
+}
+
+.purchase-page__header h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.purchase-page__header p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+@media (max-width: 40rem) {
+  .purchase-page {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px));
+  }
+}

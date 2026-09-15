@@ -1,0 +1,334 @@
+.purchase-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.purchase-form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.purchase-form__group-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.purchase-form__fields {
+  display: grid;
+  row-gap: 0.5rem;
+  column-gap: 1.25rem;
+}
+
+.purchase-form__field {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  gap: 0.5rem;
+}
+
+.purchase-form label {
+  font-weight: 700;
+}
+
+.purchase-form input,
+.purchase-form select,
+.purchase-form .bonus-select__trigger {
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  height: 3rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid #bdbbb9;
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  background: #333231;
+}
+
+.purchase-form select,
+.purchase-form .bonus-select__trigger {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23f5f4f2' stroke-width='1.5'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+}
+
+.purchase-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding-top: 0.5rem;
+}
+
+.purchase-form__actions button {
+  min-width: 7rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.purchase-form .purchase-form__buy {
+  color: #000000;
+  background: #ffffff;
+  border-color: transparent;
+}
+
+.purchase-form .purchase-form__cancel {
+  min-width: auto;
+  padding-inline: 0.75rem;
+  color: var(--color-muted);
+  background: transparent;
+  border-color: transparent;
+}
+
+.purchase-form__actions button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (min-width: 40rem) {
+  .purchase-form__fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .purchase-form__field--full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+.purchase-form [aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.purchase-form__error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+
+.purchase-form__field > .purchase-form__error {
+  min-height: 1.5em;
+}
+
+/* Keep focus outlines immediate; only the surrounding color/shadow eases in. */
+.purchase-form :is(input, select, button) {
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 100ms ease,
+    opacity 120ms ease;
+}
+
+.purchase-form__actions button:focus-visible {
+  box-shadow: 0 0 0 5px #f5f4f220;
+}
+
+.purchase-form :is(input, select, .bonus-select__trigger):focus {
+  outline: none;
+  border-color: var(--color-text);
+  box-shadow: 0 0 0 1px var(--color-text);
+}
+
+.purchase-form
+  :is(input, select, .bonus-select__trigger):focus[aria-invalid='true'] {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 1px var(--color-error);
+}
+
+@media (hover: hover) {
+  .purchase-form
+    :is(input, select, .bonus-select__trigger):enabled:hover:not(
+      [aria-invalid='true']
+    ):not(:focus-visible) {
+    border-color: var(--color-text);
+    box-shadow: 0 0 0 1px var(--color-text);
+  }
+
+  .purchase-form
+    :is(
+      input,
+      select,
+      .bonus-select__trigger
+    ):enabled:hover[aria-invalid='true']:not(:focus-visible) {
+    box-shadow: 0 0 0 1px var(--color-error);
+  }
+
+  .purchase-form__buy:enabled:hover {
+    background-color: #eeeeee;
+    opacity: 0.96;
+  }
+
+  .purchase-form__cancel:enabled:hover {
+    color: var(--color-text);
+  }
+}
+
+.purchase-form__actions button:enabled:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 3px #00000018;
+}
+
+.purchase-form__actions .purchase-form__buy:enabled:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: none;
+}
+
+.purchase-form__actions button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.purchase-form :is(input, select, .bonus-select__trigger):disabled {
+  background-color: #302d29;
+  color: var(--color-muted);
+}
+
+.purchase-form__error,
+.purchase-form__pending:not(:empty) {
+  animation: purchase-feedback-in 160ms ease-out;
+}
+
+.purchase-form__confirmation {
+  padding: 1.5rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 0.25rem;
+  background-color: var(--color-surface);
+  overflow-wrap: anywhere;
+  transform-origin: top left;
+  animation: confirmation-enter 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.purchase-form__confirmation h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 400;
+  margin: 0 0 0.75rem;
+}
+
+.purchase-form__confirmation p {
+  margin: 0;
+  animation: purchase-feedback-in 300ms ease 600ms both;
+}
+
+.purchase-form__check-circle {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50%;
+}
+
+.purchase-form__check-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: confirmation-check 450ms ease 350ms both;
+}
+
+@keyframes confirmation-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes confirmation-check {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.purchase-form__pending {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-muted);
+}
+
+.purchase-form__pending:empty {
+  display: none;
+}
+
+.purchase-form__spinner {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: 0 0 auto;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: purchase-spin 800ms linear infinite;
+}
+
+@keyframes purchase-feedback-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes purchase-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .purchase-form__confirmation,
+  .purchase-form__confirmation p,
+  .purchase-form__check-path {
+    animation: none;
+  }
+
+  .purchase-form :is(input, select, button) {
+    transition: none;
+  }
+
+  .purchase-form__actions button:enabled:active {
+    transform: none;
+  }
+
+  .purchase-form__actions .purchase-form__buy:enabled:active {
+    transform: none;
+  }
+
+  .purchase-form__error,
+  .purchase-form__pending:not(:empty),
+  .purchase-form__spinner {
+    animation: none;
+  }
+}
+
+.purchase-form input::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+.purchase-form select[data-placeholder='true'] {
+  color: var(--color-muted);
+}
